@@ -1,1 +1,66 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifying Access – DIVJOTEDU</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 selection:bg-blue-500 selection:text-white">
+
+    <div class="bg-white/90 backdrop-blur-md p-8 md:p-10 rounded-3xl shadow-xl border border-slate-200/80 max-w-md w-full text-center">
+        <div class="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mx-auto mb-6 shadow-sm border border-blue-100">
+            <i class="fa-solid fa-shield-halved animate-bounce"></i>
+        </div>
+        
+        <h1 id="status-title" class="text-2xl font-bold text-slate-900 mb-2">Verifying Access...</h1>
+        <p id="status-desc" class="text-slate-500 text-sm mb-6 leading-relaxed">
+            Please wait while we confirm your access and unlock 24-hour viewing.
+        </p>
+
+        <!-- Loader Spinner -->
+        <div id="loader" class="flex justify-center items-center space-x-2 mb-6">
+            <div class="w-3 h-3 bg-blue-600 rounded-full animate-ping"></div>
+            <div class="w-3 h-3 bg-blue-600 rounded-full animate-ping [animation-delay:0.2s]"></div>
+            <div class="w-3 h-3 bg-blue-600 rounded-full animate-ping [animation-delay:0.4s]"></div>
+        </div>
+
+        <!-- Manual Continue Button -->
+        <a id="manual-btn" href="../" class="hidden w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg transition-all text-sm block">
+            Continue to DIVJOTEDU <i class="fa-solid fa-arrow-right ml-1.5"></i>
+        </a>
+    </div>
+
+    <script>
+        // Set 24-hour access upon landing on keyfree page
+        const ACCESS_DURATION = 24 * 60 * 60 * 1000; // 24 Hours
+        const expiryTimestamp = Date.now() + ACCESS_DURATION;
+        
+        // Save to localStorage
+        localStorage.setItem('divjotedu_access_expiry', expiryTimestamp);
+
+        // Update UI state and redirect back to main website
+        setTimeout(() => {
+            document.getElementById('status-title').innerText = 'Access Granted! 🎉';
+            document.getElementById('status-desc').innerText = 'Your 24-hour access has been successfully unlocked. Redirecting back...';
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('manual-btn').classList.remove('hidden');
+
+            // Automatic redirect back to main website after 1.5 seconds
+            setTimeout(() => {
+                window.location.href = '../';
+            }, 1500);
+        }, 1200);
+    </script>
+</body>
+</html>
