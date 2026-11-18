@@ -1,10 +1,10 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f8fafc">
     <title>DIVJOTEDU – Modern Educational Platform</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,14 +13,23 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #f8fafc;
             color: #0f172a;
         }
 
-        .screen { display: none; }
-        .screen.active { display: flex; }
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: flex;
+        }
 
         .glass-card {
             background: rgba(255, 255, 255, 0.9);
@@ -29,38 +38,44 @@
         }
 
         .logo-image {
-            width: 112px;
-            height: 112px;
+            width: 120px;
+            height: 120px;
             object-fit: contain;
         }
 
         .platform-logo {
-            width: 64px;
-            height: 64px;
+            width: 68px;
+            height: 68px;
             object-fit: contain;
-            border-radius: 15px;
-            background: white;
+            border-radius: 16px;
         }
 
-        .resource-card {
-            min-height: 250px;
+        .resource-card,
+        .disclaimer-card {
+            min-height: 260px;
             transition: all .3s ease;
         }
 
-        .resource-card:hover {
+        .resource-card:hover,
+        .disclaimer-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 18px 35px rgba(15, 23, 42, .09);
+            box-shadow: 0 18px 35px rgba(15, 23, 42, .08);
         }
 
-        .tutorial-card {
-            min-height: 250px;
-            background: linear-gradient(145deg, #eff6ff, #ffffff);
-            transition: all .3s ease;
+        .community-btn {
+            transition: all .25s ease;
         }
 
-        .tutorial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 18px 35px rgba(37, 99, 235, .10);
+        .community-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, .18);
+        }
+
+        @media (max-width: 480px) {
+            .logo-image {
+                width: 100px;
+                height: 100px;
+            }
         }
     </style>
 </head>
@@ -68,14 +83,31 @@
 <body class="min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
 
     <!-- HEADER -->
-    <header class="w-full py-4 px-6 md:px-12 bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50 flex justify-between items-center">
+    <header class="w-full py-4 px-4 sm:px-6 md:px-12 bg-white/90 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50 flex justify-between items-center">
+
         <div class="flex items-center space-x-3 cursor-pointer" onclick="goToWelcome()">
             <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center text-white justify-center font-bold text-xl shadow-lg shadow-blue-500/20">
                 D
             </div>
-            <span class="text-xl font-bold tracking-tight text-slate-900">DIVJOTEDU</span>
+
+            <span class="text-lg sm:text-xl font-bold tracking-tight text-slate-900">
+                DIVJOTEDU
+            </span>
         </div>
+
+        <!-- COMMUNITY BUTTON -->
+        <a
+            href="https://t.me/cbsedivjot"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="community-btn inline-flex items-center gap-2 px-3 sm:px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-lg shadow-blue-600/15"
+        >
+            <i class="fa-brands fa-telegram text-base sm:text-lg"></i>
+            <span>COMMUNITY</span>
+        </a>
+
     </header>
+
 
     <!-- MAIN CONTENT -->
     <main class="flex-1 flex items-center justify-center p-4 md:p-8">
@@ -88,6 +120,7 @@
                 src="assets/divjot-logo.png"
                 alt="DIVJOTEDU Logo"
                 class="logo-image mb-6"
+                onerror="this.style.display='none'"
             >
 
             <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 mb-4">
@@ -98,17 +131,26 @@
                 Your premium, modern platform to access Next Toppers batches seamlessly.
             </p>
 
-            <button onclick="handleStartStudying()" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-2xl shadow-xl shadow-blue-600/20 transition-all flex items-center space-x-3 text-lg">
+            <button
+                onclick="handleStartStudying()"
+                class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-2xl shadow-xl shadow-blue-600/20 transition-all flex items-center space-x-3 text-lg"
+            >
                 <span>START STUDYING</span>
                 <i class="fa-solid fa-arrow-right text-sm"></i>
             </button>
+
         </div>
+
 
         <!-- PLATFORM SELECTION SCREEN -->
         <div id="platform-screen" class="screen flex-col items-center w-full max-w-5xl mx-auto py-6">
 
             <div class="w-full text-left mb-6">
-                <button onclick="goToWelcome()" class="text-sm font-semibold text-slate-500 hover:text-slate-800 transition-all flex items-center space-x-2 mb-2">
+
+                <button
+                    onclick="goToWelcome()"
+                    class="text-sm font-semibold text-slate-500 hover:text-slate-800 transition-all flex items-center space-x-2 mb-2"
+                >
                     <i class="fa-solid fa-arrow-left"></i>
                     <span>Back to Welcome</span>
                 </button>
@@ -116,21 +158,25 @@
                 <h2 class="text-2xl md:text-3xl font-bold text-slate-900">
                     Select Learning Platform
                 </h2>
+
                 <p class="text-slate-500 text-sm mt-2">
                     Choose your platform and start learning.
                 </p>
+
             </div>
 
-            <!-- NEXT TOPPERS + TUTORIAL -->
+
+            <!-- PLATFORM + DISCLAIMER -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
 
                 <!-- NEXT TOPPERS CARD -->
                 <div
                     onclick="openNextToppers()"
-                    class="glass-card resource-card p-6 rounded-3xl shadow-sm hover:shadow-xl transition-all cursor-pointer border border-slate-200/80 group relative overflow-hidden flex flex-col justify-between"
+                    class="glass-card resource-card p-6 rounded-3xl shadow-sm cursor-pointer border border-slate-200/80 group relative overflow-hidden flex flex-col justify-between"
                 >
 
                     <div>
+
                         <div class="flex items-center justify-between mb-5">
 
                             <!-- NEXT TOPPERS LOGO -->
@@ -138,11 +184,13 @@
                                 src="assets/next-toppers.png"
                                 alt="Next Toppers Logo"
                                 class="platform-logo"
+                                onerror="this.style.display='none'"
                             >
 
                             <span class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-100">
                                 Active
                             </span>
+
                         </div>
 
                         <h3 class="text-xl font-bold text-slate-900 mb-2">
@@ -152,64 +200,81 @@
                         <p class="text-slate-500 text-sm leading-relaxed mb-6">
                             Access all Next Toppers batches and study materials securely.
                         </p>
+
                     </div>
 
                     <div class="flex items-center text-blue-600 font-semibold text-sm">
                         <span>Launch Platform</span>
                         <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
                     </div>
+
                 </div>
 
-                <!-- TUTORIAL CARD -->
-                <div class="tutorial-card p-6 rounded-3xl shadow-sm border border-blue-100 flex flex-col justify-between">
+
+                <!-- DISCLAIMER CARD -->
+                <div class="disclaimer-card p-6 rounded-3xl shadow-sm border border-amber-100 bg-gradient-to-br from-amber-50 to-white flex flex-col justify-between">
 
                     <div>
-                        <div class="w-14 h-14 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-md mb-5">
-                            <i class="fa-solid fa-circle-play text-2xl"></i>
+
+                        <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center mb-5">
+                            <i class="fa-solid fa-circle-info text-2xl"></i>
                         </div>
 
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">
-                            Tutorial
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">
+                            Disclaimer
                         </h3>
 
-                        <p class="text-slate-500 text-sm leading-relaxed mb-6">
-                            New to Next Toppers? Watch our tutorial to learn how to access and use the platform.
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            If you're facing any problem generating key or accessing content, please contact
+                            <a
+                                href="https://t.me/divjotedu"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onclick="event.stopPropagation()"
+                                class="font-bold text-blue-600 hover:text-blue-800 underline underline-offset-2"
+                            >
+                                @divjotedu
+                            </a>.
                         </p>
+
                     </div>
 
-                    <a
-                        id="tutorial-link"
-                        href="#"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onclick="return openTutorial(event)"
-                        class="inline-flex items-center justify-center gap-2 w-full py-3 px-5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-xl transition-all shadow-lg shadow-blue-600/15"
-                    >
-                        <i class="fa-solid fa-play text-xs"></i>
-                        WATCH TUTORIAL
-                    </a>
+                    <div class="flex items-center gap-2 text-amber-600 text-xs font-semibold mt-6">
+                        <i class="fa-solid fa-headset"></i>
+                        <span>Need Help? Contact Support</span>
+                    </div>
 
                 </div>
 
             </div>
+
         </div>
+
 
         <!-- IFRAME VIEWER SCREEN -->
         <div id="viewer-screen" class="screen flex-col w-full h-[84vh] max-w-7xl mx-auto">
 
             <div class="bg-white px-4 py-3 rounded-2xl shadow-sm border border-slate-200/80 mb-4 flex items-center justify-between">
 
-                <button onclick="backToPlatform()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold rounded-xl transition-all flex items-center space-x-2">
+                <button
+                    onclick="backToPlatform()"
+                    class="px-3 sm:px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold rounded-xl transition-all flex items-center space-x-2"
+                >
                     <i class="fa-solid fa-arrow-left"></i>
                     <span>Back</span>
                 </button>
 
                 <div class="flex items-center space-x-2">
                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span class="text-xs font-semibold text-slate-700">Next Toppers Session</span>
+                    <span class="text-xs font-semibold text-slate-700">
+                        Next Toppers Session
+                    </span>
                 </div>
 
-                <button onclick="refreshIframe()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold rounded-xl transition-all flex items-center space-x-2">
+                <button
+                    onclick="refreshIframe()"
+                    class="px-3 sm:px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold rounded-xl transition-all flex items-center space-x-2"
+                >
                     <i class="fa-solid fa-rotate"></i>
                     <span>Refresh</span>
                 </button>
@@ -217,22 +282,26 @@
             </div>
 
             <div class="flex-1 w-full bg-white rounded-3xl shadow-sm border border-slate-200/80 overflow-hidden relative flex flex-col">
+
                 <iframe
                     id="content-iframe"
                     src=""
                     class="w-full h-full border-0 flex-1"
                     allowfullscreen>
                 </iframe>
+
             </div>
 
         </div>
 
     </main>
 
+
     <!-- FOOTER -->
     <footer class="w-full py-4 text-center text-xs text-slate-400 border-t border-slate-100 bg-white/50">
         &copy; 2026 DIVJOTEDU. All rights reserved.
     </footer>
+
 
     <!-- ACCESS GATE SCRIPT -->
     <script>
@@ -240,110 +309,128 @@
         const VP_GATE_URL = "https://vplink.in/RbssV";
         const ACCESS_KEY = "divjotedu_access_expiry";
 
-        // ADD YOUR TUTORIAL VIDEO LINK HERE LATER
-        const TUTORIAL_VIDEO_URL = "ADD_YOUR_VIDEO_LINK_HERE";
 
+        // SCREEN NAVIGATION
         function showScreen(screenId) {
+
             document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active');
             });
 
             document.getElementById(screenId).classList.add('active');
+
             window.scrollTo(0, 0);
         }
+
 
         function goToWelcome() {
             showScreen('welcome-screen');
         }
 
+
         function handleStartStudying() {
             showScreen('platform-screen');
         }
 
-        // TUTORIAL BUTTON
-        function openTutorial(event) {
-            event.stopPropagation();
-
-            if (
-                !TUTORIAL_VIDEO_URL ||
-                TUTORIAL_VIDEO_URL === "ADD_YOUR_VIDEO_LINK_HERE"
-            ) {
-                alert("Tutorial video link will be available soon.");
-                return false;
-            }
-
-            window.open(TUTORIAL_VIDEO_URL, "_blank", "noopener,noreferrer");
-            return false;
-        }
 
         // CHECK 24-HOUR ACCESS
         function hasAccess() {
+
             try {
+
                 const expiry = Number(localStorage.getItem(ACCESS_KEY));
+
                 return Number.isFinite(expiry) && expiry > Date.now();
+
             } catch (error) {
+
                 return false;
+
             }
         }
 
+
         // OPEN NEXT TOPPERS
         function launchNextToppers() {
+
             showScreen('viewer-screen');
 
             const iframe = document.getElementById('content-iframe');
+
             iframe.src = 'https://nt.studyace.in';
         }
 
+
         // ACCESS GATE
         function openNextToppers() {
+
             if (hasAccess()) {
+
                 launchNextToppers();
+
                 return;
             }
 
             try {
+
                 sessionStorage.setItem('divjotedu_return_to_nt', '1');
+
             } catch (error) {}
 
             window.location.href = VP_GATE_URL;
         }
 
+
         // BACK BUTTON
         function backToPlatform() {
+
             const iframe = document.getElementById('content-iframe');
+
             iframe.src = '';
+
             showScreen('platform-screen');
         }
 
+
         // REFRESH BUTTON
         function refreshIframe() {
+
             const iframe = document.getElementById('content-iframe');
+
             iframe.src = iframe.src;
         }
 
+
         // HANDLE RETURN FROM KEYFREE
         window.addEventListener('DOMContentLoaded', function() {
+
             const params = new URLSearchParams(window.location.search);
 
             let shouldReturn = false;
 
             try {
+
                 shouldReturn =
                     sessionStorage.getItem('divjotedu_return_to_nt') === '1';
+
             } catch (error) {}
+
 
             if (
                 params.get('unlocked') === '1' &&
                 hasAccess() &&
                 shouldReturn
             ) {
+
                 try {
                     sessionStorage.removeItem('divjotedu_return_to_nt');
                 } catch (error) {}
 
                 history.replaceState({}, '', window.location.pathname);
+
                 launchNextToppers();
             }
+
         });
 
     </script>
